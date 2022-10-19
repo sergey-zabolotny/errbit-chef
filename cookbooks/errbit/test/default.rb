@@ -11,6 +11,11 @@ describe port(port_number) do
   its('processes') {should include 'ruby'}
 end
 
+describe port(27017) do
+  it { should be_listening }
+  its('processes') {should include 'mongod'}
+end
+
 describe systemd_service('mongod.service') do
   it { should be_installed }
   it { should be_enabled }

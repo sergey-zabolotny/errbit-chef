@@ -39,6 +39,9 @@ platforms:
 
 suites:
   - name: install_app
+    lifecycle:
+      post_converge:
+        - local: sleep 10
     run_list:
       - recipe[errbit::default]
     attributes:
