@@ -1,8 +1,5 @@
-#output="#{Chef::JSONCompat.to_json_pretty(node['platform_family'].to_hash)}"
-#log output
-
-include_recipe 'errbit::add-mongo-repo-debian' if node['platform'] == 'debian'
-include_recipe 'errbit::add-mongo-repo-ubuntu' if node['platform'] == 'ubuntu'
+include_recipe '::add-mongo-repo-debian' if node['platform'] == 'debian'
+include_recipe '::add-mongo-repo-ubuntu' if node['platform'] == 'ubuntu'
 
 apt_update do
   action :update
