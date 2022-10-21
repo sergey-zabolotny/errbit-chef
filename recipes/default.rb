@@ -1,5 +1,10 @@
-include_recipe '::add-mongo-repo-debian' if node['platform'] == 'debian'
-include_recipe '::add-mongo-repo-ubuntu' if node['platform'] == 'ubuntu'
+apt_repository 'mongodb' do
+  distribution node['lsb']['codename'] + "/mongodb-org/4.4"
+  uri 'http://repo.mongodb.org/apt/' + node[:platform]
+  components value_for_platform('ubuntu' => {'default' => ['multiverse']},'debian' => {'default' => ['main']})
+  arch value_for_platform('ubuntu' => {'default' => 'amd64'})
+  key 'https://www.mongodb.org/static/pgp/server-4.4.asc'
+end
 
 apt_update do
   action :update
